@@ -29,6 +29,7 @@ tar -xzf MiniZincIDE-$LATEST_MINIZINC_VERSION-bundle-linux-x86_64.tgz -C /opt/Mi
 rm MiniZincIDE-$LATEST_MINIZINC_VERSION-bundle-linux-x86_64.tgz
 
 # Step 4: Create wrapper for correct LD_LIBRARY_PATH and symlink
+echo "[4/4] Setting up wrapper script..."
 echo -e '#!/bin/bash\nexec env LD_LIBRARY_PATH=/opt/MiniZinc/lib:$LD_LIBRARY_PATH /opt/MiniZinc/bin/minizinc "$@"' > /usr/local/bin/minizinc
 chmod +x /usr/local/bin/minizinc
 

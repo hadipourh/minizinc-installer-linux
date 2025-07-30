@@ -3,7 +3,7 @@
 # This script is intended to install the latest stable MiniZinc bundle for Debian-based systems.
 # It downloads and installs the latest stable MiniZinc bundle for Linux
 # It also sets up a wrapper to ensure correct shared libraries are used
-# Author: Hosein Hadipour <hosein@example.com>
+# Author: Hosein Hadipour <hsn.hadipour@gmail.com>
 # -----------------------------------------------------------------------------
 
 set -e

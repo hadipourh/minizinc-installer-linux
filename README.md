@@ -1,6 +1,6 @@
 # MiniZinc Installer for Linux (Bundle Version)
 
-This repository provides a simple and safe script to install the latest **MiniZinc** bundle release on a fresh Debian-based Linux system.
+This repository provides a simple and safe script to install the latest **MiniZinc** bundle release on a fresh Debian-based or Arch-based Linux system.
 
 ## Why This Script?
 

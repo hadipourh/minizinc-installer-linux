@@ -25,11 +25,11 @@ Depending on your Linux distribution, you can use one of the following scripts:
 
 ### For Debian-based Systems
 ```bash
-bash ./installer-debian.sh
+bash ./installerdebian.sh
 ```
 ### For Arch-based Systems
 ```bash
-bash ./installer-arch.sh
+bash ./installerarch.sh
 ```
 
 This will:

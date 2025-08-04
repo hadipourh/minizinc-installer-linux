@@ -16,6 +16,20 @@ apt-get update
 apt-get install -y wget tar curl
 
 # ------------------------------
+# Install Python environment and packages
+# ------------------------------
+echo "[+] Installing Python environment and MiniZinc Python package..."
+# Install system dependencies
+apt-get install -y python3-full python3-pip python3-venv git
+
+# Create a Python virtual environment
+python3 -m venv "$HOME/minizinc-venv"
+source "$HOME/minizinc-venv/bin/activate"
+# Install Python packages
+pip install --upgrade pip
+pip install minizinc
+
+# ------------------------------
 # Download latest MiniZinc bundle
 # ------------------------------
 echo "[+] Fetching latest MiniZinc release version..."

@@ -9,31 +9,43 @@
 set -e
 
 # Step 1: Install required packages
-echo "[1/4] Installing dependencies..."
+echo "[1/5] Installing dependencies..."
 pacman -Sy --noconfirm \
     wget \
     curl \
     tar \
     coreutils
 
-# Step 2: Download the latest MiniZinc bundle
-echo "[2/4] Downloading MiniZinc bundle..."
+# Step 2: Install Python environment and packages
+echo "[2/5] Installing Python environment and MiniZinc Python package..."
+# Install system dependencies
+pacman -S --noconfirm python python-pip python-virtualenv git
+
+# Create a Python virtual environment
+python3 -m venv "$HOME/minizinc-venv"
+source "$HOME/minizinc-venv/bin/activate"
+# Install Python packages
+pip install --upgrade pip
+pip install minizinc
+
+# Step 3: Download the latest MiniZinc bundle
+echo "[3/5] Downloading MiniZinc bundle..."
 cd /opt
 LATEST_MINIZINC_VERSION=$(curl -s https://api.github.com/repos/MiniZinc/MiniZincIDE/releases/latest | grep -oP '"tag_name": "\K(.*)(?=")')
 wget "https://github.com/MiniZinc/MiniZincIDE/releases/download/$LATEST_MINIZINC_VERSION/MiniZincIDE-$LATEST_MINIZINC_VERSION-bundle-linux-x86_64.tgz"
 
-# Step 3: Extract to /opt/MiniZinc
-echo "[3/4] Extracting MiniZinc..."
+# Step 4: Extract to /opt/MiniZinc
+echo "[4/5] Extracting MiniZinc..."
 mkdir -p /opt/MiniZinc
 tar -xzf MiniZincIDE-$LATEST_MINIZINC_VERSION-bundle-linux-x86_64.tgz -C /opt/MiniZinc --strip-components=1
 rm MiniZincIDE-$LATEST_MINIZINC_VERSION-bundle-linux-x86_64.tgz
 
-# Step 4: Create wrapper for correct LD_LIBRARY_PATH and symlink
-echo "[4/4] Setting up wrapper script..."
+# Step 5: Create wrapper for correct LD_LIBRARY_PATH and symlink
+echo "[5/5] Setting up wrapper script..."
 echo -e '#!/bin/bash\nexec env LD_LIBRARY_PATH=/opt/MiniZinc/lib:$LD_LIBRARY_PATH /opt/MiniZinc/bin/minizinc "$@"' > /usr/local/bin/minizinc
 chmod +x /usr/local/bin/minizinc
 
-# Step 5: Verify installation
+# Step 6: Verify installation
 echo "[+] MiniZinc $LATEST_MINIZINC_VERSION installed successfully!"
 minizinc --version
 
